@@ -20,7 +20,8 @@ class PasswordTextField extends StatelessWidget {
   Function(String val)? onSubmitted;
   Function(String val)? onChanged;
   List<TextInputFormatter>? inputFormatters;
-  PasswordTextField({super.key, this.controller, this.isDense, this.contentPadding, this.border, this.constraints, this.hintText, this.hintTextStyle, this.style, this.onEditingComplete, this.onSubmitted, this.onChanged, this.inputFormatters});
+  TextInputAction? inputAction;
+  PasswordTextField({super.key, this.controller, this.isDense, this.contentPadding, this.border, this.constraints, this.hintText, this.hintTextStyle, this.style, this.onEditingComplete, this.onSubmitted, this.onChanged, this.inputFormatters, this.inputAction});
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +36,7 @@ class PasswordTextField extends StatelessWidget {
       maxLines: 1,
       minLines: 1,
       obscureText: value,
+      textInputAction: inputAction,
       inputFormatters: inputFormatters,
       keyboardType: TextInputType.visiblePassword,
       controller: controller,

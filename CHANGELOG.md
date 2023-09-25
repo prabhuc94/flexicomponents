@@ -10,3 +10,6 @@
 
 ## 0.0.3
 - Password Text field input formatter added
+
+## 0.0.4
+- Input action added
