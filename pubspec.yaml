@@ -21,9 +21,6 @@ dependencies:
   window_manager: ^0.3.6
   dropdown_search: ^5.0.6
   flutter_quill: ^7.4.7
-  html: ^0.15.4
-  fast_cached_network_image: ^1.2.0
-  flutter_webrtc: ^0.9.43
 
 dev_dependencies:
   flutter_test:

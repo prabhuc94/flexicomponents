@@ -7,7 +7,6 @@
 #include "generated_plugin_registrant.h"
 
 #include <flexicomponents/flexicomponents_plugin_c_api.h>
-#include <flutter_webrtc/flutter_web_r_t_c_plugin.h>
 #include <pasteboard/pasteboard_plugin.h>
 #include <screen_retriever/screen_retriever_plugin.h>
 #include <url_launcher_windows/url_launcher_windows.h>
@@ -16,8 +15,6 @@
 void RegisterPlugins(flutter::PluginRegistry* registry) {
   FlexicomponentsPluginCApiRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("FlexicomponentsPluginCApi"));
-  FlutterWebRTCPluginRegisterWithRegistrar(
-      registry->GetRegistrarForPlugin("FlutterWebRTCPlugin"));
   PasteboardPluginRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("PasteboardPlugin"));
   ScreenRetrieverPluginRegisterWithRegistrar(

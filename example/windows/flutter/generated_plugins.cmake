@@ -4,7 +4,6 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   flexicomponents
-  flutter_webrtc
   pasteboard
   screen_retriever
   url_launcher_windows
