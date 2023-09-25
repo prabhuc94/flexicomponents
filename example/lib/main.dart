@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/services.dart';
 import 'package:flexicomponents/flexicomponents.dart';
+import 'package:flexicomponents/components/app_component_password_field.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,8 +32,8 @@ class _MyAppState extends State<MyApp> {
     // Platform messages may fail, so we use a try/catch PlatformException.
     // We also handle the message potentially returning null.
     try {
-      platformVersion =
-          await _flexicomponentsPlugin.getPlatformVersion() ?? 'Unknown platform version';
+      platformVersion = await _flexicomponentsPlugin.getPlatformVersion() ??
+          'Unknown platform version';
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
@@ -49,15 +50,24 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Plugin example app'),
-        ),
-        body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+    return ScreenUtilInit(
+      builder: (_, __) => MaterialApp(
+        home: Scaffold(
+          appBar: AppBar(
+            title: const Text('Plugin example app'),
+          ),
+          body: Center(
+            child: PasswordTextField(
+              isDense: true,
+                hintText: "Enter password",
+                contentPadding: EdgeInsets.all(10.spMin),
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16.spMin))),
+          ),
         ),
       ),
+      minTextAdapt: true,
+      designSize: const Size(360, 690),
     );
   }
 }

@@ -2,7 +2,7 @@ import 'package:flexicomponents/extension/app_simple_extensions.dart';
 import 'package:flexicomponents/helper/app_helper_date_formats.dart';
 import 'package:flexicomponents/helper/app_helper_picker.dart';
 import 'package:flexicomponents/helper/app_paths_color.dart';
-import 'package:flexicomponents/paths/app_paths_vectors.dart';
+import 'package:flexicomponents/path/app_paths_vectors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';

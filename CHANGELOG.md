@@ -4,3 +4,6 @@
 - Vector images added
 - Images added
 - Gif files added
+
+## 0.0.2
+- Password Text field added

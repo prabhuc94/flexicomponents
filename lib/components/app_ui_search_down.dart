@@ -1,6 +1,6 @@
 import 'package:flexicomponents/components/app_components_custom_search_field.dart';
 import 'package:flexicomponents/extension/app_simple_extensions.dart';
-import 'package:flexicomponents/paths/app_paths_vectors.dart';
+import 'package:flexicomponents/path/app_paths_vectors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
