@@ -2,6 +2,7 @@
 
 import 'package:flexicomponents/extension/app_simple_extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PasswordTextField extends StatelessWidget {
@@ -18,7 +19,8 @@ class PasswordTextField extends StatelessWidget {
   Function()? onEditingComplete;
   Function(String val)? onSubmitted;
   Function(String val)? onChanged;
-  PasswordTextField({super.key, this.controller, this.isDense, this.contentPadding, this.border, this.constraints, this.hintText, this.hintTextStyle, this.style, this.onEditingComplete, this.onSubmitted, this.onChanged});
+  List<TextInputFormatter>? inputFormatters;
+  PasswordTextField({super.key, this.controller, this.isDense, this.contentPadding, this.border, this.constraints, this.hintText, this.hintTextStyle, this.style, this.onEditingComplete, this.onSubmitted, this.onChanged, this.inputFormatters});
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +35,7 @@ class PasswordTextField extends StatelessWidget {
       maxLines: 1,
       minLines: 1,
       obscureText: value,
+      inputFormatters: inputFormatters,
       keyboardType: TextInputType.visiblePassword,
       controller: controller,
       onTapOutside: (val) {

@@ -7,3 +7,6 @@
 
 ## 0.0.2
 - Password Text field added
+
+## 0.0.3
+- Password Text field input formatter added
