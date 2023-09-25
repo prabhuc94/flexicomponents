@@ -13,17 +13,17 @@ dependencies:
   flutter_web_plugins:
     sdk: flutter
   plugin_platform_interface: ^2.0.2
-  flutter_svg: any
-  flutter_screenutil: any
-  date_time: any
-  collection: any
-  intl: any
-  window_manager: any
-  dropdown_search: any
-  flutter_quill: any
-  html: any
-  fast_cached_network_image: any
-  flutter_webrtc: any
+  flutter_svg: ^2.0.7
+  flutter_screenutil: ^5.9.0
+  date_time: ^0.10.0
+  collection: ^1.17.2
+  intl: ^0.18.1
+  window_manager: ^0.3.6
+  dropdown_search: ^5.0.6
+  flutter_quill: ^7.4.7
+  html: ^0.15.4
+  fast_cached_network_image: ^1.2.0
+  flutter_webrtc: ^0.9.43
 
 dev_dependencies:
   flutter_test:
