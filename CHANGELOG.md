@@ -13,3 +13,6 @@
 
 ## 0.0.4
 - Input action added
+
+## 0.0.5
+- TimerCard package added for Asset loading

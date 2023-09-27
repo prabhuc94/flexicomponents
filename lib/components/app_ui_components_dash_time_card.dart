@@ -20,6 +20,7 @@ class TimerCard extends StatelessWidget {
   bool? status;
   Color? color;
   ValueNotifier<String?>? timer;
+  String package = "flexicomponents";
 
   TimerCard(
       {super.key,
@@ -33,7 +34,8 @@ class TimerCard extends StatelessWidget {
       this.disableColor,
       this.timer,
       this.color,
-      this.onTap});
+      this.onTap,
+      this.package = "flexicomponents"});
 
   @override
   Widget build(BuildContext context) {
@@ -65,9 +67,9 @@ class TimerCard extends StatelessWidget {
             children: [
               if (svgAsset.isNotNullOrEmpty)
                 SvgPicture.asset(svgAsset.toNotNull,
-                    color: (color ?? Theme.of(context).primaryColor), height: 37.spMin),
+                    color: (color ?? Theme.of(context).primaryColor), height: 37.spMin, package: package),
               if (imgAsset.isNotNullOrEmpty)
-                Image.asset(imgAsset.toNotNull, height: 37.spMin),
+                Image.asset(imgAsset.toNotNull, height: 37.spMin, package: package),
               if (imgAsset.isNotNullOrEmpty || svgAsset.isNotNullOrEmpty)
                 6.spMin.height,
               if (timer != null)
