@@ -14,6 +14,7 @@ class SliderView extends StatelessWidget {
   final Color inactiveColor;
   final Color? borderColor;
   final double? elevation;
+  TextStyle? labelStyle;
   final ValueNotifier<bool> _valueNotifier = ValueNotifier(false);
 
   SliderView({super.key,
@@ -27,6 +28,7 @@ class SliderView extends StatelessWidget {
     this.colorOn = Colors.green,
     this.colorOff = Colors.red,
     this.inactiveColor = Colors.grey,
+    this.labelStyle
   }) {
     _valueNotifier.value = (value ?? false);
   }
@@ -64,7 +66,7 @@ class SliderView extends StatelessWidget {
       child: Center(
         child: Text(
           text.toNotNull,
-          style: TextStyle(
+          style: (labelStyle ?? const TextStyle()).copyWith(
               color: color,
               fontSize: contentSize,
               fontWeight: FontWeight.w700),

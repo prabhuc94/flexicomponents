@@ -21,6 +21,9 @@ class TimerCard extends StatelessWidget {
   Color? color;
   ValueNotifier<String?>? timer;
   String package = "flexicomponents";
+  TextStyle? timerStyle;
+  TextStyle? labelStyle;
+  TextStyle? sliderlabelStyle;
 
   TimerCard(
       {super.key,
@@ -35,6 +38,9 @@ class TimerCard extends StatelessWidget {
       this.timer,
       this.color,
       this.onTap,
+      this.timerStyle,
+      this.labelStyle,
+      this.sliderlabelStyle,
       this.package = "flexicomponents"});
 
   @override
@@ -53,12 +59,16 @@ class TimerCard extends StatelessWidget {
       child: Container(
         padding: 10.spMin.padding,
         decoration: BoxDecoration(
-          gradient: (status == false) ? LinearGradient(colors: [
-            FlexiColors.LINEAR_START,
-            FlexiColors.LINEAR_END,
-          ], begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,) : null
-        ),
+            gradient: (status == false)
+                ? LinearGradient(
+                    colors: [
+                      FlexiColors.LINEAR_START,
+                      FlexiColors.LINEAR_END,
+                    ],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  )
+                : null),
         child: Flex(
             direction: Axis.vertical,
             mainAxisSize: MainAxisSize.min,
@@ -67,35 +77,52 @@ class TimerCard extends StatelessWidget {
             children: [
               if (svgAsset.isNotNullOrEmpty)
                 SvgPicture.asset(svgAsset.toNotNull,
-                    color: (color ?? Theme.of(context).primaryColor), height: 37.spMin, package: package),
+                    color: (color ?? Theme.of(context).primaryColor),
+                    height: 37.spMin,
+                    package: package),
               if (imgAsset.isNotNullOrEmpty)
-                Image.asset(imgAsset.toNotNull, height: 37.spMin, package: package),
+                Image.asset(imgAsset.toNotNull,
+                    height: 37.spMin, package: package),
               if (imgAsset.isNotNullOrEmpty || svgAsset.isNotNullOrEmpty)
                 6.spMin.height,
               if (timer != null)
                 ValueListenableBuilder(
-                  key: PageStorageKey("${DateTime.now().millisecondsSinceEpoch}"),
-                    valueListenable: timer!, builder: (context, value, child) => Text(value.toNotNull.isNullOrEmpty ? "00:00" : value.toHHMM().toNotNull,
+                    key: PageStorageKey(
+                        "${DateTime.now().millisecondsSinceEpoch}"),
+                    valueListenable: timer!,
+                    builder: (context, value, child) => Text(
+                        value.toNotNull.isNullOrEmpty
+                            ? "00:00"
+                            : value.toHHMM().toNotNull,
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context)
+                            .textTheme
+                            .labelMedium
+                            ?.copyWith(
+                                fontSize: 20.spMin,
+                                color: (color ?? Colors.black),
+                                fontWeight: FontWeight.w700))),
+              if (timer == null)
+                Text(
+                    time.toNotNull.isNullOrEmpty
+                        ? "00:00"
+                        : time.toNotNull.toHHMM().toNotNull,
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                        fontSize: 20.spMin,
-                        color: (color ?? Colors.black),
-                        fontWeight: FontWeight.w700))),
-                if (timer == null)
-                  Text(time.toNotNull.isNullOrEmpty ? "00:00" : time.toNotNull.toHHMM().toNotNull,
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                          fontSize: 20.spMin,
-                          color: (color ?? Colors.black),
-                          fontWeight: FontWeight.w700)),
+                    style:
+                        (timerStyle ?? Theme.of(context).textTheme.labelMedium)
+                            ?.copyWith(
+                                fontSize: 20.spMin,
+                                color: (color ?? Colors.black),
+                                fontWeight: FontWeight.w700)),
               5.spMin.height,
               Text(
                 label.toNotNull,
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                    color: (color ?? Theme.of(context).hintColor),
-                    fontWeight: FontWeight.w600,
-                    fontSize: 12.spMin),
+                style: (labelStyle ?? Theme.of(context).textTheme.labelMedium)
+                    ?.copyWith(
+                        color: (color ?? Theme.of(context).hintColor),
+                        fontWeight: FontWeight.w600,
+                        fontSize: 12.spMin),
               ),
               if (onChanged != null) 6.spMin.height,
               if (onChanged != null)
@@ -103,6 +130,7 @@ class TimerCard extends StatelessWidget {
                   textOff: "On".toUpperCase(),
                   textOn: "Off".toUpperCase(),
                   value: status,
+                  labelStyle: sliderlabelStyle,
                   contentSize: 9.spMin,
                   onChanged: onChanged,
                   elevation: 5.spMin,
