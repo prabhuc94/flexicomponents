@@ -128,7 +128,7 @@ class DropSearch<T> extends StatelessWidget {
                       )
                 : Padding(
                   padding: 9.spMin.padding,
-                  child: SvgPicture.asset(Vector.SEARCH),
+                  child: SvgPicture.asset(Vector.SEARCH, package: "flexicomponents"),
                 )
                     : null,
               ),

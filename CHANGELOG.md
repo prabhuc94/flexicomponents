@@ -18,4 +18,7 @@
 - TimerCard package added for Asset loading
 
 ## 0.0.6
-- TextStyles added for TimerCard, Slider 
+- TextStyles added for TimerCard, Slider
+
+## 0.0.7
+- Package added for missing components

@@ -88,7 +88,7 @@ class DateField extends StatelessWidget {
                           color: fontColor ?? Theme.of(context).hintColor,
                           fontWeight: fontWeight))),
                   WidgetSpan(child: 10.spMin.width),
-                  WidgetSpan(child: SvgPicture.asset(calendarAsset.toNotNull, color: enabled ? Theme.of(context).iconTheme.color : Theme.of(context).hintColor,)),
+                  WidgetSpan(child: SvgPicture.asset(calendarAsset.toNotNull, color: enabled ? Theme.of(context).iconTheme.color : Theme.of(context).hintColor, package: "flexicomponents",)),
                 ]
               )),
             ),
