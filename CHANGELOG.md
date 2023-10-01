@@ -22,3 +22,12 @@
 
 ## 0.0.7
 - Package added for missing components
+
+## 0.0.8
+- Desktopauth manager added
+
+## 0.0.9
+- Desktopauth manager issue fixed
+
+## 0.0.10
+- Desktopauth manager app name inserting field added
