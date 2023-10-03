@@ -31,3 +31,6 @@
 
 ## 0.0.10
 - Desktopauth manager app name inserting field added
+
+## 0.0.11
+- Additional component and library added
