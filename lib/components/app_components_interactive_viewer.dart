@@ -57,21 +57,21 @@ class CustomInteractiveViewer extends StatelessWidget {
   }
 
   void _handleKeyPress(RawKeyEvent event) {
-    if (event.isControlPressed &&
+    if ((event.isControlPressed &&
         ((event.logicalKey == LogicalKeyboardKey.minus) ||
-            (event.logicalKey == LogicalKeyboardKey.numpadSubtract))) {
+            (event.logicalKey == LogicalKeyboardKey.numpadSubtract))) || (event.logicalKey == LogicalKeyboardKey.numpadSubtract)) {
       updateScale(_scaleFactor - 0.1);
-    } else if (event.isControlPressed &&
+    } else if ((event.isControlPressed &&
         ((event.logicalKey == LogicalKeyboardKey.equal) ||
-            (event.logicalKey == LogicalKeyboardKey.numpadAdd))) {
+            (event.logicalKey == LogicalKeyboardKey.numpadAdd))) || (event.logicalKey == LogicalKeyboardKey.numpadAdd)) {
       updateScale(_scaleFactor + 0.1);
-    } else if (event.isControlPressed &&
+    } else if ((event.isControlPressed &&
         ((event.logicalKey == LogicalKeyboardKey.digit0) ||
-            (event.logicalKey == LogicalKeyboardKey.numpad0))) {
+            (event.logicalKey == LogicalKeyboardKey.numpad0))) || (event.logicalKey == LogicalKeyboardKey.numpad0)) {
       resetScale();
-    } else if ((event.isControlPressed && (event.logicalKey == LogicalKeyboardKey.arrowRight))) {
+    } else if ((event.isControlPressed && (event.logicalKey == LogicalKeyboardKey.arrowRight)) || (event.logicalKey == LogicalKeyboardKey.arrowRight)) {
       onNext?.call();
-    } else if ((event.isControlPressed && (event.logicalKey == LogicalKeyboardKey.arrowLeft))) {
+    } else if ((event.isControlPressed && (event.logicalKey == LogicalKeyboardKey.arrowLeft)) || (event.logicalKey == LogicalKeyboardKey.arrowLeft)) {
       onPrevious?.call();
     }
   }
@@ -82,9 +82,6 @@ class CustomInteractiveViewer extends StatelessWidget {
         key: key,
         autofocus: true,
         onKey: (event) {
-          if (kDebugMode) {
-            print("EVENT [${event.character}]");
-          }
           if (event is RawKeyUpEvent) {
             _pressedKeys.remove(event.logicalKey);
           } else if (event is RawKeyDownEvent) {
@@ -92,7 +89,13 @@ class CustomInteractiveViewer extends StatelessWidget {
           }
           isControllPressing = event.isControlPressed;
           if (_pressedKeys.contains(LogicalKeyboardKey.controlLeft) ||
-              _pressedKeys.contains(LogicalKeyboardKey.controlRight)) {
+              _pressedKeys.contains(LogicalKeyboardKey.controlRight) ||
+              _pressedKeys.contains(LogicalKeyboardKey.arrowLeft) ||
+              _pressedKeys.contains(LogicalKeyboardKey.arrowRight) ||
+              _pressedKeys.contains(LogicalKeyboardKey.numpadAdd) ||
+              _pressedKeys.contains(LogicalKeyboardKey.numpadSubtract) ||
+              _pressedKeys.contains(LogicalKeyboardKey.numpad0)
+          ) {
             _handleKeyPress(event);
           }
         },

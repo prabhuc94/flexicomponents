@@ -34,3 +34,12 @@
 
 ## 0.0.11
 - Additional component and library added
+
+## 0.0.12
+- Icon color changed
+- Additional library added
+- [Windows] kill last instance functionality added using process_run
+- StickyTable upgraded
+- PasswordTextField upgraded
+- URL launcher added
+- Helper added for launch url & create log

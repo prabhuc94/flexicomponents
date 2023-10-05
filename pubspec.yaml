@@ -1,6 +1,6 @@
 name: flexicomponents
 description: Components & Extension required for FlexiTrac
-version: 0.0.11
+version: 0.0.12
 homepage: https://github.com/prabhuc94/flexicomponents
 
 environment:
@@ -24,11 +24,16 @@ dependencies:
   oauth2: ^2.0.2
   http: ^1.1.0
   path: ^1.8.3
+  html: ^0.15.2
   window_to_front: ^0.0.3
   desktop_webview_window: ^0.2.3
   path_provider: ^2.1.1
   flutter_toastr: ^1.0.3
   local_notifier: ^0.1.5
+  hotkey_manager: ^0.1.8
+  scrollable_positioned_list: ^0.3.8
+  process_run: ^0.13.1
+  url_launcher: ^6.1.14
 
 dev_dependencies:
   flutter_test:
