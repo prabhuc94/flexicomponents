@@ -21,6 +21,7 @@ class DateField extends StatelessWidget {
   Color? borderColor;
   EdgeInsets? padding;
   String? calendarAsset;
+  bool highlight = false; // IF GIVEN DATE IS NOT CURRENT DATE THEN HIGHLIGHT
 
   final ValueNotifier<bool> _disablePrevious = ValueNotifier(false);
   final ValueNotifier<bool> _disableNext = ValueNotifier(false);
@@ -39,6 +40,7 @@ class DateField extends StatelessWidget {
       this.radius,
       this.padding,
       this.calendarAsset = Vector.CALENDARLIGHT,
+      this.highlight = false,
       this.borderColor})
       : super(key: key) {
     lastDate = lastDate.onlyDate(format: DF.DATE_FORMAT);
@@ -61,7 +63,7 @@ class DateField extends StatelessWidget {
           : null,
       child: Card(
         elevation: 0,
-        color: (enabled) ? Theme.of(context).cardColor : Theme.of(context).disabledColor,
+        color: (enabled) ? (highlight && (inputDate.isCurrentDate == false)) ? context.colorScheme.error : Theme.of(context).cardColor : Theme.of(context).disabledColor,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular((radius ?? 20.spMin)),
             side: BorderSide(color: enabled ? (borderColor ?? FlexiColors.Gray) : Theme.of(context).disabledColor, width: 1.0)),

@@ -43,3 +43,6 @@
 - PasswordTextField upgraded
 - URL launcher added
 - Helper added for launch url & create log
+
+## 0.0.13
+- DateField highlight added
