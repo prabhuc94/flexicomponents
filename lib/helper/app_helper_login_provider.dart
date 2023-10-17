@@ -6,6 +6,7 @@ import 'package:path/path.dart' as p;
 import 'package:http/http.dart' as http;
 import 'package:oauth2/oauth2.dart' as oauth2;
 import 'package:path_provider/path_provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:window_to_front/window_to_front.dart';
 import 'package:desktop_webview_window/desktop_webview_window.dart';
 import 'package:flexicomponents/extension/app_simple_extensions.dart';
@@ -68,11 +69,13 @@ class DesktopOAuthManager extends DesktopLoginManager {
   final LoginProvider loginProvider;
   String? clientId = "cdfca89f-87e6-4419-8b16-dca33d94c787";
   String? appName;
+  bool onlyWeb = false;
 
   DesktopOAuthManager({
     this.loginProvider = LoginProvider.azure,
     this.clientId = "cdfca89f-87e6-4419-8b16-dca33d94c787",
-    this.appName = "FlexiComponent"
+    this.appName = "FlexiComponent",
+    this.onlyWeb = false,
   }) : super();
 
   Future<void> logout() async {
@@ -135,7 +138,7 @@ class DesktopOAuthManager extends DesktopLoginManager {
     var authorizationUrl =
     grant.getAuthorizationUrl(redirectUrl, scopes: loginProvider.scopes);
 
-    await redirect(authorizationUrl, appName: appName);
+    await redirect(authorizationUrl, appName: appName, onlyWeb: onlyWeb);
     var responseQueryParameters = await listen();
     var client =
     await grant.handleAuthorizationResponse(responseQueryParameters ?? {});
@@ -153,9 +156,9 @@ class DesktopOAuthManager extends DesktopLoginManager {
 
     var authorizationUrl =
     grant.getAuthorizationUrl(redirectUrl, scopes: []);
-    await redirect(authorizationUrl, appName: appName);
-    // var responseQueryParameters = await listen();
+    await redirect(authorizationUrl, appName: appName, onlyWeb: onlyWeb);
     _webview?.close();
+    await listen();
     return;
   }
 }
@@ -176,12 +179,12 @@ class DesktopLoginManager {
   Webview? _webview;
 
   // Launch the URL in the browser using url_launcher
-  Future<void> redirect(Uri authorizationUrl, {String? appName}) async {
+  Future<void> redirect(Uri authorizationUrl, {String? appName, bool onlyWeb = false}) async {
     bool isWebViewAvailable = true;
     if (Platform.isWindows) {
       isWebViewAvailable = await WebviewWindow.isWebviewAvailable();
     }
-    if (isWebViewAvailable){
+    if (isWebViewAvailable && !onlyWeb){
       _webview = await WebviewWindow.create(
         configuration: CreateConfiguration(
           title: appName.toNotNull,
@@ -207,6 +210,13 @@ class DesktopLoginManager {
         ..onClose.whenComplete(() {
           log("on close");
         });
+    } else {
+      var url = authorizationUrl;
+      if (await canLaunchUrl(url)) {
+        await launchUrl(url);
+      } else {
+        throw Exception('Could not launch $url');
+      }
     }
   }
 
@@ -216,7 +226,7 @@ class DesktopLoginManager {
 
     request?.response.statusCode = 200;
     request?.response.headers.set('content-type', 'text/plain');
-    // request?.response.writeln('Authenticated! You can close this tab.');
+    request?.response.writeln('Authenticated! You can close this tab.');
     await request?.response.close();
     await redirectServer?.close();
     _webview?.close();

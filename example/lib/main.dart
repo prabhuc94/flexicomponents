@@ -1,3 +1,4 @@
+import 'package:flexicomponents/helper/app_helper_login_provider.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -56,13 +57,21 @@ class _MyAppState extends State<MyApp> {
           appBar: AppBar(
             title: const Text('Plugin example app'),
           ),
+          floatingActionButton: FloatingActionButton.small(onPressed: () async {
+            var data = await DesktopOAuthManager(onlyWeb: false).SSO();
+            print('DATA:\t$data');
+          }, mouseCursor: SystemMouseCursors.click, child: Icon(Icons.webhook_rounded)),
           body: Center(
-            child: PasswordTextField(
-              isDense: true,
-                hintText: "Enter password",
-                contentPadding: EdgeInsets.all(10.spMin),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16.spMin))),
+            child: Column(
+              children: [
+                PasswordTextField(
+                    isDense: true,
+                    hintText: "Enter password",
+                    contentPadding: EdgeInsets.all(10.spMin),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(16.spMin))),
+              ],
+            )
           ),
         ),
       ),

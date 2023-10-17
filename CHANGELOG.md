@@ -46,3 +46,6 @@
 
 ## 0.0.13
 - DateField highlight added
+
+## 0.0.14
+- Only WEB field added for AuthManager
