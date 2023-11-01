@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LogsTextView extends StatelessWidget {
-  final dynamic model;
-  const LogsTextView({super.key, required this.model});
+  final String? activity, status, windowName, windowTitle;
+  final DateTime? timestamp;
+  const LogsTextView({super.key, required this.activity, required this.windowName, required this.windowTitle, required this.status, required this.timestamp});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class LogsTextView extends StatelessWidget {
               padding: EdgeInsets.only(
                   bottom: 10.spMin),
               child: Text(
-                "${model.timestamp?.toLocal().toDate(dateFormat: DF.T12S_FORMAT)}",
+                "${timestamp?.toLocal().toDate(dateFormat: DF.T12S_FORMAT)}",
                 style: style(context),
               ))),
       5.spMin.width,
@@ -29,11 +30,11 @@ class LogsTextView extends StatelessWidget {
               bottom: 10.spMin),
           child: RichText(
             text: TextSpan(
-              text: model.activity.isNullOrEmpty
-                  ? "${model.windowName.toNotNull}: ${model.windowTitle.toNotNull}".stripeNull
-                  : model.activity.stripeNull.split("<b>")[0],
-              children: model.workStatus.equalsOr(["MESSAGE", "System"]) && model.activity.toNotNull.contains("<b>") ? [
-                TextSpan(text: model.activity.stripeNull.split("<b>").lastOrNull?.replaceAll("<b>", "").replaceAll("</b>", ""), style: style(context)?.copyWith(fontWeight: FontWeight.w600, color: FlexiColors.BLUE))
+              text: activity.isNullOrEmpty
+                  ? "${windowName.toNotNull}: ${windowTitle.toNotNull}".stripeNull
+                  : activity.stripeNull.split("<b>")[0],
+              children: status.equalsOr(["MESSAGE", "System"]) && activity.toNotNull.contains("<b>") ? [
+                TextSpan(text: activity.stripeNull.split("<b>").lastOrNull?.replaceAll("<b>", "").replaceAll("</b>", ""), style: style(context)?.copyWith(fontWeight: FontWeight.w600, color: FlexiColors.BLUE))
               ] : [],
               style: style(context),
             ),
@@ -45,7 +46,7 @@ class LogsTextView extends StatelessWidget {
     return Theme.of(context).textTheme.labelMedium?.copyWith(
         fontSize: 12.spMin,
         fontWeight: FontWeight.w500,
-        color: model.activity.equals("Turned off Private mode") ? FlexiColors.GREEN :statusColor(status: model.workStatus)
+        color: activity.equals("Turned off Private mode") ? FlexiColors.GREEN :statusColor(status: status)
     );
   }
 

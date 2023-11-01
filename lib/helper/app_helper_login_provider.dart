@@ -180,43 +180,47 @@ class DesktopLoginManager {
 
   // Launch the URL in the browser using url_launcher
   Future<void> redirect(Uri authorizationUrl, {String? appName, bool onlyWeb = false}) async {
-    bool isWebViewAvailable = true;
-    if (Platform.isWindows) {
-      isWebViewAvailable = await WebviewWindow.isWebviewAvailable();
-    }
-    if (isWebViewAvailable && !onlyWeb){
-      _webview = await WebviewWindow.create(
-        configuration: CreateConfiguration(
-          title: appName.toNotNull,
-          titleBarHeight: 0,
-          windowHeight: 520,
-          windowWidth: 420,
-          userDataFolderWindows: await _getWebViewPath(),
-          titleBarTopPadding: Platform.isMacOS ? 30 : 0,
-        ),
-      );
-      _webview
-        ?..setBrightness(Brightness.dark)
-        ..setApplicationNameForUserAgent("WebviewExample/1.0.0")
-        ..launch(authorizationUrl.toString())
-        ..addOnUrlRequestCallback((url) {
-          final uri = Uri.parse(url);
-          if (authorizationUrl.queryParameters[''].toString().contains(url) && uri.queryParameters['code'] != null) {
-            _webview?.close();
-          } else if (url.contains("logoutsession")) {
-            _webview?.close();
-          }
-        })
-        ..onClose.whenComplete(() {
-          log("on close");
-        });
-    } else {
-      var url = authorizationUrl;
-      if (await canLaunchUrl(url)) {
-        await launchUrl(url);
-      } else {
-        throw Exception('Could not launch $url');
+    try {
+      bool isWebViewAvailable = true;
+      if (Platform.isWindows) {
+        isWebViewAvailable = await WebviewWindow.isWebviewAvailable();
       }
+      if (isWebViewAvailable && !onlyWeb){
+        _webview = await WebviewWindow.create(
+          configuration: CreateConfiguration(
+            title: appName.toNotNull,
+            titleBarHeight: 0,
+            windowHeight: 520,
+            windowWidth: 420,
+            userDataFolderWindows: await _getWebViewPath(),
+            titleBarTopPadding: Platform.isMacOS ? 30 : 0,
+          ),
+        );
+        _webview
+          ?..setBrightness(Brightness.dark)
+          ..setApplicationNameForUserAgent("WebviewExample/1.0.0")
+          ..launch(authorizationUrl.toString())
+          ..addOnUrlRequestCallback((url) {
+            final uri = Uri.parse(url);
+            if (authorizationUrl.queryParameters[''].toString().contains(url) && uri.queryParameters['code'] != null) {
+              _webview?.close();
+            } else if (url.contains("logoutsession")) {
+              _webview?.close();
+            }
+          })
+          ..onClose.whenComplete(() {
+            log("on close");
+          });
+      } else {
+        var url = authorizationUrl;
+        if (await canLaunchUrl(url)) {
+          await launchUrl(url);
+        } else {
+          'Could not launch $url'.error;
+        }
+      }
+    } catch (e) {
+      'Error $e'.error;
     }
   }
 

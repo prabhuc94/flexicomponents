@@ -1,4 +1,5 @@
-import 'dart:convert';
+// ignore_for_file: must_be_immutable
+
 import 'package:flexicomponents/components/app_components_icons.dart';
 import 'package:flexicomponents/extension/app_simple_extensions.dart';
 import 'package:flutter/material.dart';
@@ -175,7 +176,7 @@ class StickyTable<T> extends StatelessWidget {
                   children: rows
                       ?.map((e) => TableRow(
                       decoration: BoxDecoration(
-                          color: jsonEncode(e.value) == jsonEncode(selected)
+                          color: e.value == selected
                               ? rowColor ?? Theme.of(context).primaryColor.withOpacity(0.08)
                               : null),
                       children: e.cells

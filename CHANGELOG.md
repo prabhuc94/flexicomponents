@@ -49,3 +49,7 @@
 
 ## 0.0.14
 - Only WEB field added for AuthManager
+
+## 0.0.15
+- Logs text ui modified
+- Sticky table modified
