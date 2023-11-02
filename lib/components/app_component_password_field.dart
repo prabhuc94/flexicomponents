@@ -61,8 +61,8 @@ class PasswordTextField extends StatelessWidget {
             hintStyle: hintTextStyle ?? context.textTheme.labelSmall,
             constraints: constraints,
             border: border,
-            focusedBorder: border,
-            enabledBorder: border,
+            focusedBorder: border?.copyWith(borderSide: BorderSide(width: 0.5.spMin, color: Theme.of(context).primaryColor)),
+            enabledBorder: border?.copyWith(borderSide: BorderSide(width: 0.5.spMin)),
             contentPadding: contentPadding ?? EdgeInsets.only(
                 top: 0,
                 bottom: 0,

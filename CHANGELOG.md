@@ -53,3 +53,6 @@
 ## 0.0.15
 - Logs text ui modified
 - Sticky table modified
+
+## 0.0.16
+- Border changed
