@@ -18,6 +18,18 @@ class Helper {
     }
   }
 
+  static Future<bool> openFile({required File file, String scheme = "file"}) async {
+    final uri = Uri(path: file.path, scheme: scheme);
+    if (await canLaunchUrl(uri)) {
+      return await launchUrl(uri);
+    } else {
+      if (kDebugMode) {
+        print("Could not open file ${file.path}");
+      }
+      return false;
+    }
+  }
+
   static Future<File> createLog(
       {required String? input, String folder = "log", String? fileName, String mainFolder = "FlexiComponents"}) async {
     final Directory directory = await getTemporaryDirectory();
