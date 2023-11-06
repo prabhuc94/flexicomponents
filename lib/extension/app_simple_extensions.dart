@@ -394,6 +394,15 @@ extension StyleSize on BuildContext {
 
 }
 
+extension Contexter on BuildContext? {
+  void let(Function(BuildContext val) callBack) {
+    var context = this;
+    if (context != null) {
+      callBack.call(context);
+    }
+  }
+}
+
 extension StreamExtensions<T> on Stream<T> {
   ValueListenable<T> toValueNotifier(
     T initialValue, {
