@@ -60,3 +60,6 @@
 ## 0.0.17
 - Button View added,
 - File open added
+
+## 0.0.18
+- Floating dialog added
