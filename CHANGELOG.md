@@ -63,3 +63,6 @@
 
 ## 0.0.18
 - Floating dialog added
+
+## 0.0.19
+- default color modified

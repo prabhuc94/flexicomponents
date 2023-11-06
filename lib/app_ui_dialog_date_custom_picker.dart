@@ -88,7 +88,7 @@ class _CustomDatePicker extends StatelessWidget {
         Dialog(
           insetAnimationCurve: Curves.bounceIn,
           backgroundColor:
-              datePickerTheme.backgroundColor ?? defaults.backgroundColor,
+          (datePickerTheme.backgroundColor ?? defaults.backgroundColor) != Colors.transparent ? datePickerTheme.backgroundColor ?? defaults.backgroundColor : Theme.of(context).cardColor,
           elevation: useMaterial3
               ? datePickerTheme.elevation ?? defaults.elevation!
               : datePickerTheme.elevation ?? dialogTheme.elevation ?? 24,
