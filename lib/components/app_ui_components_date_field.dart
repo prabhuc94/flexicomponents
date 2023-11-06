@@ -21,6 +21,7 @@ class DateField extends StatelessWidget {
   Color? borderColor;
   EdgeInsets? padding;
   String? calendarAsset;
+  Color datePickerBgColor = Colors.white;
   bool highlight = false; // IF GIVEN DATE IS NOT CURRENT DATE THEN HIGHLIGHT
 
   final ValueNotifier<bool> _disablePrevious = ValueNotifier(false);
@@ -41,6 +42,7 @@ class DateField extends StatelessWidget {
       this.padding,
       this.calendarAsset = Vector.CALENDARLIGHT,
       this.highlight = false,
+      this.datePickerBgColor = Colors.white,
       this.borderColor})
       : super(key: key) {
     lastDate = lastDate.onlyDate(format: DF.DATE_FORMAT);
@@ -56,6 +58,7 @@ class DateField extends StatelessWidget {
       onTap: enabled
           ? () => Picker.DatePicker(
               context: context,
+              bgColor: datePickerBgColor,
               lastDate: (lastDate ?? DateTime.now()),
               firstDate: (inputDate?.isBefore(DateTime.now().subtract(Duration(days: durationDays))) ?? false) ? inputDate : DateTime.now().subtract(Duration(days: durationDays)),
               initialDate: inputDate,

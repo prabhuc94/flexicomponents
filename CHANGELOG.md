@@ -66,3 +66,6 @@
 
 ## 0.0.19
 - default color modified
+
+## 0.0.20
+- Color customize modified

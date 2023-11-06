@@ -14,11 +14,12 @@ class CustomDatePickerDialog {
       {required DateTime initialDate,
       required DateTime firstDate,
       required DateTime lastDate,
+      Color bgColor = Colors.white,
       Function(DateTime?)? onChanged}) {
     DialogManager()
       ..context = context
       ..child = _CustomDatePicker(
-          initialDate: initialDate, firstDate: firstDate, lastDate: lastDate, onChanged: onChanged,)
+          initialDate: initialDate, firstDate: firstDate, lastDate: lastDate, onChanged: onChanged,backgroundColor: bgColor,)
       ..barrierDismissible = true
       ..showClose = true
       ..show();
@@ -34,12 +35,14 @@ class _CustomDatePicker extends StatelessWidget {
   final Function(DateTime?)? onChanged;
   final TextEditingController _dateInputController = TextEditingController();
   final ValueNotifier<DatePickerEntryMode> _onDatePickerModeChange = ValueNotifier(DatePickerEntryMode.calendar);
+  final Color? backgroundColor;
 
   _CustomDatePicker(
       {super.key,
       required this.initialDate,
       required this.firstDate,
       required this.lastDate,
+        this.backgroundColor,
       this.onChanged}) {
     _dateInputController.text = initialDate.toDate(dateFormat: DF.NORMAL_DATE);
   }
@@ -87,8 +90,7 @@ class _CustomDatePicker extends StatelessWidget {
       children: [
         Dialog(
           insetAnimationCurve: Curves.bounceIn,
-          backgroundColor:
-          (datePickerTheme.backgroundColor ?? defaults.backgroundColor) != Colors.transparent ? datePickerTheme.backgroundColor ?? defaults.backgroundColor : Theme.of(context).cardColor,
+          backgroundColor: backgroundColor,
           elevation: useMaterial3
               ? datePickerTheme.elevation ?? defaults.elevation!
               : datePickerTheme.elevation ?? dialogTheme.elevation ?? 24,
