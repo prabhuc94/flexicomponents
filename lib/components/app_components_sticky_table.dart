@@ -158,101 +158,92 @@ class StickyTable<T> extends StatelessWidget {
           ],
         ),
         if (rows.isNotNullOrEmpty)
-          Expanded(
-            child: ListView(
-              shrinkWrap: true,
-              controller: scrollController ?? controller,
-              scrollDirection: Axis.vertical,
-              clipBehavior: Clip.antiAliasWithSaveLayer,
+          Expanded(child: SingleChildScrollView(
+            controller: scrollController ?? controller,
+            child: Table(
               key: UniqueKey(),
-              children: [
-                Table(
-                  key: UniqueKey(),
-                  columnWidths: columnWidths,
-                  defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-                  border: rowBorder ??
-                      TableBorder(
-                          horizontalInside: BorderSide(width: 0.2.spMin)),
-                  children: rows
-                      ?.map((e) => TableRow(
-                      decoration: BoxDecoration(
-                          color: e.value == selected
-                              ? rowColor ?? Theme.of(context).primaryColor.withOpacity(0.08)
-                              : null),
-                      children: e.cells
-                          .map((c) => TableRowInkWell(
-                        mouseCursor: SystemMouseCursors.click,
-                        onTap: () => (c.onPressed != null) ? c.onPressed?.call() : onRowClick?.call(e.value),
-                        onSecondaryTapDown: (val) =>
-                            onRowRightClick?.call(val, e.value),
-                        overlayColor: MaterialStatePropertyAll(
-                            (rowColor ??
-                                context.theme.colorScheme
-                                    .primary)
-                                .withOpacity(0.08)),
-                        child: FocusableActionDetector(
-                            mouseCursor:
-                            SystemMouseCursors.click,
-                            child: Padding(
-                                padding: rowPadding ?? 15.spMin.padding,
-                                child:
-                                ((c.showCheckbox ?? false) || (c.prefix != null) || (c.suffix != null))
-                                    ? Row(
-                                  mainAxisAlignment:
-                                  MainAxisAlignment
-                                      .start,
-                                  crossAxisAlignment:
-                                  CrossAxisAlignment
-                                      .center,
-                                  mainAxisSize:
-                                  MainAxisSize
-                                      .min,
-                                  children: [
-                                    if (c.prefix != null)
-                                      c.prefix ?? Container(),
-                                    if (c.showCheckbox ?? false)
-                                      Checkbox(
-                                        splashRadius: 0,
-                                        visualDensity: VisualDensity.compact,
-                                        value: (e.isSelected ?? false),
-                                        onChanged: (val) => c.onPressed?.call(),
-                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.spMin)),
-                                        materialTapTargetSize: MaterialTapTargetSize.padded,
-                                        mouseCursor: SystemMouseCursors.click,
-                                        checkColor: context.colorScheme.onSurface,
-                                      ),
-                                    5.spMin.width,
-                                    Text(
-                                        c.label
-                                            .toNotNull,
-                                        style: c.style ??
-                                            rowStyle,
-                                        overflow:
-                                        TextOverflow
-                                            .ellipsis),
-                                    if (c.suffix != null)
-                                      3.spMin.width,
-                                    if (c.suffix != null)
-                                      c.suffix ?? Container(),
-                                  ],
-                                )
-                                    : Text(
-                                  c.label
-                                      .toNotNull,
-                                  style: c.style ??
-                                      rowStyle,
-                                  overflow:
-                                  TextOverflow
-                                      .ellipsis,
-                                ))),
-                      ))
-                          .toList()))
-                      .toList() ??
-                      [],
-                )
-              ],
-            ),
-          ),
+              columnWidths: columnWidths,
+              defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+              border: rowBorder ??
+                  TableBorder(
+                      horizontalInside: BorderSide(width: 0.2.spMin)),
+              children: rows
+                  ?.map((e) => TableRow(
+                  decoration: BoxDecoration(
+                      color: e.value == selected
+                          ? rowColor ?? Theme.of(context).primaryColor.withOpacity(0.08)
+                          : null),
+                  children: e.cells
+                      .map((c) => TableRowInkWell(
+                    mouseCursor: SystemMouseCursors.click,
+                    onTap: () => (c.onPressed != null) ? c.onPressed?.call() : onRowClick?.call(e.value),
+                    onSecondaryTapDown: (val) =>
+                        onRowRightClick?.call(val, e.value),
+                    overlayColor: MaterialStatePropertyAll(
+                        (rowColor ??
+                            context.theme.colorScheme
+                                .primary)
+                            .withOpacity(0.08)),
+                    child: FocusableActionDetector(
+                        mouseCursor:
+                        SystemMouseCursors.click,
+                        child: Padding(
+                            padding: rowPadding ?? 15.spMin.padding,
+                            child:
+                            ((c.showCheckbox ?? false) || (c.prefix != null) || (c.suffix != null))
+                                ? Row(
+                              mainAxisAlignment:
+                              MainAxisAlignment
+                                  .start,
+                              crossAxisAlignment:
+                              CrossAxisAlignment
+                                  .center,
+                              mainAxisSize:
+                              MainAxisSize
+                                  .min,
+                              children: [
+                                if (c.prefix != null)
+                                  c.prefix ?? Container(),
+                                if (c.showCheckbox ?? false)
+                                  Checkbox(
+                                    splashRadius: 0,
+                                    visualDensity: VisualDensity.compact,
+                                    value: (e.isSelected ?? false),
+                                    onChanged: (val) => c.onPressed?.call(),
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.spMin)),
+                                    materialTapTargetSize: MaterialTapTargetSize.padded,
+                                    mouseCursor: SystemMouseCursors.click,
+                                    checkColor: context.colorScheme.onSurface,
+                                  ),
+                                5.spMin.width,
+                                Flexible(child: Text(
+                                    c.label
+                                        .toNotNull,
+                                    style: c.style ??
+                                        rowStyle,
+                                    overflow:
+                                    TextOverflow
+                                        .ellipsis)),
+                                if (c.suffix != null)
+                                  3.spMin.width,
+                                if (c.suffix != null)
+                                  c.suffix ?? Container(),
+                              ],
+                            )
+                                : Text(
+                              c.label
+                                  .toNotNull,
+                              style: c.style ??
+                                  rowStyle,
+                              overflow:
+                              TextOverflow
+                                  .ellipsis,
+                            ))),
+                  ))
+                      .toList()))
+                  .toList() ??
+                  [],
+            ),)),
         if (rows.isNullOrEmpty && emptyRow != null)
           Expanded(
             child: Center(

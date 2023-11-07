@@ -72,3 +72,7 @@
 
 ## 0.0.21
 - Contexter implemented
+
+## 0.0.22
+- Sticky table modified,
+- Hotkey dialog added
