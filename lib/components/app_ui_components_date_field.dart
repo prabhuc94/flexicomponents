@@ -90,7 +90,7 @@ class DateField extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.labelLarge?.copyWith(
                           fontSize: fontSize,
-                          color: fontColor ?? Theme.of(context).hintColor,
+                          color: (highlight && (inputDate.isCurrentDate == false)) ? Colors.white : fontColor ?? Theme.of(context).hintColor,
                           fontWeight: fontWeight))),
                   WidgetSpan(child: 10.spMin.width),
                   WidgetSpan(child: SvgPicture.asset(calendarAsset.toNotNull, color: enabled ? Theme.of(context).iconTheme.color : Theme.of(context).hintColor, package: "flexicomponents",)),

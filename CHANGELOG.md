@@ -76,3 +76,7 @@
 ## 0.0.22
 - Sticky table modified,
 - Hotkey dialog added
+
+## 0.0.23
+- DateField modified
+- Login Provider path changed

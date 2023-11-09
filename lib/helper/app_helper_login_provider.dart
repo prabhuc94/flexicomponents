@@ -240,10 +240,10 @@ class DesktopLoginManager {
   }
 
   Future<String> _getWebViewPath() async {
-    final document = await getTemporaryDirectory();
+    final document = await getApplicationSupportDirectory();
     return p.join(
       document.path,
-      'desktop_webview_window',
+      'desktop_window',
     );
   }
 }
