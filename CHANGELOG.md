@@ -80,3 +80,6 @@
 ## 0.0.23
 - DateField modified
 - Login Provider path changed
+
+## 0.0.24
+- RadioText integrated
