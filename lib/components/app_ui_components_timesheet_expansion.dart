@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
-class TimeSheetExpansionTile extends StatelessWidget {
+class TimeSheetExpansionTile<T> extends StatelessWidget {
   bool isExpanded = false;
   String? projectname, totalHours;
   Widget? child;
@@ -21,8 +21,15 @@ class TimeSheetExpansionTile extends StatelessWidget {
   final StreamController<bool> _expansionController =
       StreamController.broadcast(sync: true);
 
+  final T? value;
+  final T? groupValue;
+  final Function(T?)? onChanged;
+
   TimeSheetExpansionTile({
     super.key,
+    this.value,
+    this.groupValue,
+    this.onChanged,
     this.onVerify,
     this.isExpanded = false,
     this.projectname,
@@ -40,6 +47,7 @@ class TimeSheetExpansionTile extends StatelessWidget {
     this.screenExist = true
   }) {
     _expansionController.add(isExpanded);
+    _expansionController.add((value == groupValue));
   }
 
   @override
@@ -172,18 +180,20 @@ class TimeSheetExpansionTile extends StatelessWidget {
                   cursor: SystemMouseCursors.click,
                   child: GestureDetector(
                     onTap: () {
+                      onChanged?.call(value);
                       isExpanded = !isExpanded;
                       _expansionController.add(isExpanded);
                       onExpand?.call(isExpanded);
                     },
-                    child: Icon((snapshot.data ?? false || (snapshot.data ?? false))
+                    child: Icon((value == groupValue)
                         ? Icons.remove_circle_outline_rounded
                         : Icons.add_circle_outline_rounded),
                   ),
                 ),
                 iconColor: FlexiColors.DATEGREY,
-                initiallyExpanded: (snapshot.data ?? false),
+                initiallyExpanded: (value == groupValue),
                 onExpansionChanged: (val) {
+                  onChanged?.call(value);
                   isExpanded = isExpanded;
                   _expansionController.add(isExpanded);
                   onExpand?.call(isExpanded);

@@ -1,3 +1,4 @@
+import 'package:flexicomponents/extension/app_simple_extensions.dart';
 import 'package:flexicomponents/helper/app_helper_login_provider.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
@@ -70,6 +71,28 @@ class _MyAppState extends State<MyApp> {
                     contentPadding: EdgeInsets.all(10.spMin),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(16.spMin))),
+                10.spMin.height,
+                SelectionArea(child: Container(
+                  padding: 10.spMin.padding,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text("Question", style: context.textTheme.labelMedium?.copyWith(fontWeight: FontWeight.w600), textAlign: TextAlign.start),
+                      10.spMin.height,
+                      Container(
+                        alignment: AlignmentDirectional.centerStart,
+                        clipBehavior: Clip.antiAliasWithSaveLayer,
+                        padding: 10.spMin.padding,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5.spMin),
+                          color: context.theme.hintColor.withOpacity(0.08),
+                        ),
+                        child: Text("Answer", textAlign: TextAlign.start, style: context.textTheme.labelSmall),
+                      )
+                    ],
+                  ),
+                ))
               ],
             )
           ),

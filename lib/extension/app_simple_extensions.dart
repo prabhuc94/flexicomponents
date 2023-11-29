@@ -177,6 +177,12 @@ extension StringManipulation on String? {
     final RegExp regExp = RegExp(r'[a-zA-Z]+$');
     return regExp.hasMatch(toNotNull);
   }
+
+  bool get isHtml {
+    final RegExp htmlRegExp =
+    RegExp('<[^>]*>', multiLine: true, caseSensitive: false);
+    return htmlRegExp.hasMatch(toNotNull);
+  }
 }
 
 extension ListManipulation on List? {

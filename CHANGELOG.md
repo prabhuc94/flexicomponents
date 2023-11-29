@@ -83,3 +83,8 @@
 
 ## 0.0.24
 - RadioText integrated
+
+## 0.0.25
+- Quill version updated
+- Q&A widget created
+- Timesheet value setted
